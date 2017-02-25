@@ -1,7 +1,7 @@
 import unittest
 
 from data_structures.dequeue import ArrayDeque
-from data_structures.stack import Empty
+from utils.exeptions import Empty
 
 
 class TestDequeueMethods(unittest.TestCase):

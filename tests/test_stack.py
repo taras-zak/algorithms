@@ -1,7 +1,7 @@
 import unittest
 
 from data_structures.stack import ListStack, ArrayStack
-from data_structures.stack import Empty
+from utils.exeptions import Empty
 
 
 class CommonTests:
@@ -50,3 +50,5 @@ class TestArrayStackMethods(unittest.TestCase, CommonTests):
     def tearDown(self):
         self.stack = None
 
+if __name__ == '__main__':
+    unittest.main()

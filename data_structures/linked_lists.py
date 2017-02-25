@@ -1,4 +1,7 @@
+from utils.exeptions import Empty
+
 #TODO:  - size of node and whole list
+#       - node use __slots__
 #       - make pythonic
 
 class Node:
@@ -20,7 +23,7 @@ class Node:
 
 
 class LinkedList:
-
+    # TODO: refactor (pop, insert)
     def __init__(self):
         self.size = 0
         self.head = None
@@ -128,7 +131,56 @@ class LinkedList:
             curr = curr.get_next()
         return ' '.join((map(str,res)))
 
-# TODO: refactor (pop, insert)
+class CircularQueue:
+
+    class _Node:
+        __slots__ = '_data', '_next'
+
+        def __init__(self, data, next):
+            self._data = data
+            self._next = next
+
+    def __init__(self):
+        self._tail = None
+        self._size = 0
+
+    def __len__(self):
+        return self._size
+
+    def is_empty(self):
+        return not bool(self._size)
+
+    def first(self):
+        if self.is_empty():
+            raise Empty('Queue empty')
+        head = self._tail._next
+        return head._data
+
+    def dequeue(self):
+        if self.is_empty():
+            raise Empty('Queue empty')
+        oldhead = self._tail._next
+        if self._size == 1:
+            self._tail = None
+        else:
+            self._tail._next = oldhead._next
+        self._size -= 1
+        return oldhead._data
+
+    def enqueue(self, item):
+        new_item = self._Node(item, None)
+        if self.is_empty():
+            new_item._next = new_item
+        else:
+            new_item._next = self._tail._next
+            self._tail._next = new_item
+        self._tail = new_item
+        self._size += 1
+
+    def rotate(self):
+        if self._size > 0:
+            self._tail = self._tail._next
+
 
 if __name__=="__main__":
     l = LinkedList()

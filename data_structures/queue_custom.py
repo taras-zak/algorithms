@@ -1,4 +1,6 @@
-from data_structures.stack import ListStack, Empty
+from data_structures.stack import ListStack
+from utils.exeptions import Empty
+
 
 class ArrayQueue:
     """Queue implementation using a Python list circular fashion,

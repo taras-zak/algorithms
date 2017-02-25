@@ -1,7 +1,5 @@
 from data_structures.linked_lists import LinkedList
-
-class Empty(Exception):
-    pass
+from utils.exeptions import Empty
 
 class ArrayStack:
     """Stack implementation using a Python list as storage"""

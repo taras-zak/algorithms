@@ -1,4 +1,4 @@
-from data_structures.stack import Empty
+from utils.exeptions import Empty
 from data_structures.queue_custom import ArrayQueue
 
 
