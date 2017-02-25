@@ -1,5 +1,6 @@
-from queue_custom import ArrayQueue
-from stack import Empty
+from data_structures.stack import Empty
+from data_structures.queue_custom import ArrayQueue
+
 
 class ArrayDeque(ArrayQueue):
 

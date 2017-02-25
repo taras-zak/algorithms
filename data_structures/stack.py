@@ -1,3 +1,5 @@
+from data_structures.linked_lists import LinkedList
+
 class Empty(Exception):
     pass
 
@@ -29,27 +31,27 @@ class ArrayStack:
             raise Empty('Stack is empty')
         return self._data.pop()
 
-def transfer(s,t):
-    """R-6.3 solution"""
-    while not s.is_empty():
-        item = s.pop()
-        t.push(item)
+class ListStack:
+    """Stack implementation using custom linked_list as storage"""
 
-def rec_remove(stack):
-    """R-6.4 solution"""
-    if stack.is_empty():
-        return
-    stack.pop()
-    return rec_rem(stack)
+    def __init__(self):
+        self._data = LinkedList()
 
+    def __len__(self):
+        return self._data.size
 
-if __name__== "__main__":
-    s = ArrayStack()
-    t = ArrayStack()
-    for i in range(15):
-        s.push(i)
-    transfer(s,t)
-    print(s,t)
-    rec_rem(t)
-    print(s,t)
+    def is_empty(self):
+        return not bool(self._data.size)
 
+    def top(self):
+        if self.is_empty():
+            raise Empty('Stack is empty')
+        return self._data.head.data
+
+    def push(self, item):
+        self._data.append(item)
+
+    def pop(self):
+        if self.is_empty():
+            raise Empty('Stack is empty')
+        return self._data.pop()

@@ -1,5 +1,6 @@
 import unittest
-from linked_lists import LinkedList
+
+from data_structures.linked_lists import LinkedList
 
 
 class TestLinkedListMethods(unittest.TestCase):
@@ -70,9 +71,9 @@ class TestLinkedListMethods(unittest.TestCase):
         for i in range(5, 0, -1):
             l.add(i)
 
-        self.assertEqual(l.pop(0).data, 1)
-        self.assertEqual(l.pop(2).data, 4)
-        self.assertEqual(l.pop(l.size-1).data, 5)
+        self.assertEqual(l.pop(0), 1)
+        self.assertEqual(l.pop(2), 4)
+        self.assertEqual(l.pop(l.size-1), 5)
 
         self.assertRaises(IndexError, l.pop, -1)
         self.assertRaises(IndexError, l.pop, 100)

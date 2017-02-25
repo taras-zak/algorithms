@@ -1,6 +1,31 @@
 from pprint import pprint
 import collections
 
+labyrinth_example = [
+
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+
+    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+
+    [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+
+    [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+
+    [1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+
+    [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+
+    [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
 class Queue:
     def __init__(self):
@@ -29,33 +54,40 @@ class SimpleGraph:
         for _dir in dirs:
             row = coord.row + _dir.row
             col = coord.col + _dir.col
-            if 0 <= row < self.rows and 0 <= col < self.cols and self.edges[row][col]:
+            if 0 <= row < self.rows and 0 <= col < self.cols and not self.edges[row][col]:
                 result.append(Coord(row, col))
         return result
 
 Coord = collections.namedtuple('Node_coord', 'row,col')
 
-def breadth_first_search(graph, start):
+def breadth_first_search(graph, start, end):
     frontier = Queue()
     frontier.put(start)
-    visited = {}
-    visited[start] = True
+    came_from = {}
+    came_from[start] = None
 
     while not frontier.empty():
         current = frontier.get()
         print("Visititng {}".format(current))
+
+        if current == end:
+            break
+
         n = graph.neighbors(current)
         for next_ in n:
-            if next_ not in visited:
+            if next_ not in came_from:
                 frontier.put(next_)
-                visited[next_] = True
+                came_from[next_] = current
 
 
 graph = SimpleGraph(5, 5)
+graph.edges = labyrinth_example
+graph.cols = 12
+graph.rows = 12
 pprint(graph.edges)
-print(graph.neighbors(Coord(2,4)),end='\n\n')
+print(graph.neighbors(Coord(3,3)),end='\n\n')
 
-breadth_first_search(graph, Coord(0,0))
+breadth_first_search(graph, Coord(1,1), Coord(10,10))
 
 
 

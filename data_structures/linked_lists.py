@@ -97,8 +97,11 @@ class LinkedList:
             raise IndexError('Position {} out of range'.format(pos))
 
     def pop(self, pos=None):
+        """Remove and return the element at pos (default from the head of list)
+        Raises IndexError if list is empty or index is out of range.
+        """
         if pos is None:
-            pos = self.size-1
+            pos = 0
         if 0 <= pos < self.size:
             index = 0
             curr = self.head
@@ -112,7 +115,7 @@ class LinkedList:
             else:
                 self.head = curr.get_next()
             self.size -= 1
-            return curr
+            return curr.get_data()
         else:
             raise IndexError('Position {} out of range'.format(pos))
 

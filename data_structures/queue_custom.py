@@ -1,4 +1,4 @@
-from stack import ArrayStack, Empty
+from data_structures.stack import ListStack, Empty
 
 class ArrayQueue:
     """Queue implementation using a Python list circular fashion,
@@ -59,11 +59,45 @@ class ArrayQueue:
             front = (front + 1) % len(old)
         self._front = 0
 
-class QueueOnStacks:
+class ListQueue:
     pass
 
+class QueueOnStacks:
+    def __init__(self):
+        self._pop_stack = ListStack()
+        self._push_stack = ListStack()
+        self._size = 0
+        self._front = 0
+
+    def __len__(self):
+        return self._size
+
+    def is_empty(self):
+        return not bool(self._size)
+
+    def _transfer(self):
+        while not self._push_stack.is_empty():
+            item = self._push_stack.pop()
+            self._pop_stack.push(item)
+        if self._pop_stack.is_empty():
+            raise Empty('Queue is empty')
+
+    def first(self):
+        if self._pop_stack.is_empty():
+            self._transfer()
+        return self._pop_stack.top()
+
+    def enqueue(self, item):
+        self._push_stack.push(item)
+        self._size += 1
+
+    def dequeue(self):
+        if self._pop_stack.is_empty():
+            self._transfer()
+        item = self._pop_stack.pop()
+        self._size -= 1
+        return item
+
 if __name__=="__main__":
-    q = ArrayQueue()
-    for i in range(11):
-        q.enqueue(i)
-    print(q.first())
+    q = QueueOnStacks()
+
