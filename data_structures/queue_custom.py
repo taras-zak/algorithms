@@ -101,5 +101,6 @@ class QueueOnStacks:
         return item
 
 if __name__=="__main__":
+    # TODO: stack on queues
     q = QueueOnStacks()
 

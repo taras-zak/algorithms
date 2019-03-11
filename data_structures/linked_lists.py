@@ -182,5 +182,31 @@ class CircularQueue:
             self._tail = self._tail._next
 
 
+class DoublyLinkedList:
+    """Class providing doubly linked list representation"""
+
+    class _Node:
+        __slots__ = '_data', '_prev', '_next'
+
+        def __init__(self, element, prev=None, next=None):
+            self._data = element
+            self._prev = prev
+            self._next = next
+
+    def __init__(self):
+        self._header = self._Node(None)
+        self._trailer = self._Node(None)
+        self._header._next = self._trailer
+        self._trailer._prev = self._header
+        self._size = 0
+
+    def __len__(self):
+        return self._size
+
+    def is_empty(self):
+        return not bool(self._size)
+
+
+
 if __name__=="__main__":
     l = LinkedList()
