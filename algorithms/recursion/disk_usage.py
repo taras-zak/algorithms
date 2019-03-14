@@ -10,4 +10,4 @@ def du(path):
     print("{0:<7} {1}".format(total, path))
     return total
 
-du("courses")
+du("../")

@@ -1,8 +1,6 @@
 from random import randint
 from utils.generate import generate_array
-# def generate_array(length=33, min=0, max=10):
-#     data = [random.randint(min, max) for _ in range(length + 1)]
-#     return data
+
 
 def partition(arr, start, stop):
     pivot = arr[stop]

@@ -11,4 +11,5 @@ def good_fibo(n):
         a,b = good_fibo(n-1)
         return a+b, a
 
+# TODO: benchmarks
 print(good_fibo(10))

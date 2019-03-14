@@ -14,5 +14,6 @@ def unique3(seq, start, stop):
     elif not unique3(seq, start+1, stop): return False
     else: return seq[start] != seq[stop-1]
 
+# TODO: test, bench
 seq = 'sdf'
 print(unique3(seq,0,len(seq)))

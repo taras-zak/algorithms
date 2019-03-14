@@ -36,6 +36,6 @@ def dfs(tree, acum=None):
         for sibling in tree.right_siblings:
             dfs(sibling, acum)
     return acum
-// TODO: pprint ntree
+# TODO: pprint ntree
 
 print(dfs(tree))

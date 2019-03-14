@@ -17,7 +17,6 @@ def gen_rand_array(n):
     return arr
 
 if __name__ == '__main__':
-    import unittest
 
     arr = list(range(1,120))
     random.shuffle(arr)

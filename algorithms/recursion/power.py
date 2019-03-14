@@ -17,7 +17,8 @@ def pow2(x,n):
         if n%2 == 1:
             result *= x
         return result
-        
+
+# TODO: benchmarks
 start = time.time()
 res1 = pow_(2, 995)
 cp = time.time()
