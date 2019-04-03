@@ -6,7 +6,6 @@ def bin_search(seq, item, start=0, stop=None):
     if stop is None:
         stop = len(seq)
 
-    # mid = len(seq)//2
     mid = start + (stop - start) // 2
     if (stop - start) == 0:
         return False
