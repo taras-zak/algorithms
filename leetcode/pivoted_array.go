@@ -1,6 +1,9 @@
-package leetcode
+package main
 
-import "github.com/taras-zak/algorithms/algorithms/searching"
+import (
+	"fmt"
+	"github.com/taras-zak/algorithms/algorithms/searching"
+)
 
 
 func Search(nums []int, target int) int {
@@ -39,5 +42,9 @@ func FindPivot(nums []int, low, high int) int {
 	}
 	// TODO: rm this
 	return mid
+}
+
+func main() {
+	fmt.Println("pivoted")
 }
 
