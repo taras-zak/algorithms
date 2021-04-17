@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/taras-zak/algorithms/utils"
 	"math"
 )
 
@@ -11,18 +12,11 @@ func numSquares(n int) int {
 		i := len(dp)
 		minCount := math.MaxInt64
 		for j := 1; j*j <= i; j++ {
-			minCount = min(minCount, dp[i-j*j]+1)
+			minCount = utils.Min(minCount, dp[i-j*j]+1)
 		}
 		dp = append(dp, minCount)
 	}
 	return dp[n]
-}
-
-func min(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
 }
 
 func main() {

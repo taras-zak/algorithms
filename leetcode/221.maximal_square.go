@@ -2,17 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/taras-zak/algorithms/utils"
 )
-
-func Min(elements ...int) int {
-	minimum := elements[0]
-	for _, el := range elements {
-		if minimum > el {
-			minimum = el
-		}
-	}
-	return minimum
-}
 
 func PrintIntMatrix(i [][]int) {
 	for _, row := range i {
@@ -34,7 +25,7 @@ func maximalSquare(matrix [][]int) int {
 	for row := 1; row <= rows; row++ {
 		for col := 1; col <= cols; col++ {
 			if matrix[row-1][col-1] == 1 {
-				dp[row][col] = Min(dp[row-1][col], dp[row][col-1], dp[row-1][col-1]) + 1
+				dp[row][col] = utils.Min(dp[row-1][col], dp[row][col-1], dp[row-1][col-1]) + 1
 				if dp[row][col] > res {
 					res = dp[row][col]
 				}
