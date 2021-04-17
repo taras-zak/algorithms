@@ -7,9 +7,8 @@ func coinChange(coins []int, amount int) int {
 	for i := 1; i <= amount; i++ {
 		dp[i] = amount + 1
 	}
-
-	for c := 0; c < len(coins); c++ {
-		for a := 1; a <= amount; a++ {
+	for a := 1; a <= amount; a++ {
+		for c := 0; c < len(coins); c++ {
 			if coins[c] <= a {
 				dp[a] = utils.Min(dp[a], dp[a-coins[c]]+1)
 			}
