@@ -1,5 +1,6 @@
 package main
 
+// Kahn's topological sort
 func canFinish(numCourses int, prerequisites [][]int) bool {
 	adjList := make(map[int][]int)
 	incEdges := make([]int, numCourses)
