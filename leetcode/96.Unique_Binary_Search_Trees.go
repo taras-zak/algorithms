@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // Catalan numbers
 func numTreesCatalan(n int) int {
 	curr := 1
@@ -25,5 +27,6 @@ func numTrees(n int) int {
 }
 
 func main() {
-
+	fmt.Println(numTrees(5))
+	fmt.Println(numTreesCatalan(5))
 }
