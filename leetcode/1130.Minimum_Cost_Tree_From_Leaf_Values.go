@@ -2,6 +2,20 @@ package main
 
 import "fmt"
 
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 func mctFromLeafValues(arr []int) int {
 	maxInt := 1<<32 - 1
 	maxEl := [40][40]int{}
@@ -27,19 +41,31 @@ func mctFromLeafValues(arr []int) int {
 	return minSum[0][len(arr)-1]
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
+func mctFromLeafValuesGreedy(arr []int) int {
+	res := 0
+	for len(arr) > 1 {
+		minIdx, minEl := 0, arr[0]
+		for i, m := range arr {
+			if minEl > m {
+				minEl = m
+				minIdx = i
+			}
+		}
+		if minIdx > 0 && minIdx < len(arr)-1 {
+			res += arr[minIdx] * min(arr[minIdx-1], arr[minIdx+1])
+		}
+		if minIdx == 0 {
+			res += arr[minIdx] * arr[minIdx+1]
+		}
+		if minIdx == len(arr)-1 {
+			res += arr[minIdx] * arr[minIdx-1]
+		}
+		arr = append(arr[:minIdx], arr[minIdx+1:]...)
 	}
-	return b
-}
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+	return res
 }
 
 func main() {
 	fmt.Println(mctFromLeafValues([]int{6, 2, 4, 7, 3, 7, 1, 8, 9}))
+	fmt.Println(mctFromLeafValuesGreedy([]int{6, 2, 4, 7, 3, 7, 1, 8, 9}))
 }
