@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func min(a, b int) int {
 	if a < b {
@@ -17,7 +19,7 @@ func max(a, b int) int {
 }
 
 func mctFromLeafValues(arr []int) int {
-	maxInt := 1<<32 - 1
+	maxInt := 1<<31 - 1
 	maxEl := [40][40]int{}
 	minSum := [40][40]int{}
 	for i := 0; i < len(arr); i++ {
@@ -65,7 +67,28 @@ func mctFromLeafValuesGreedy(arr []int) int {
 	return res
 }
 
+func mctFromLeafValuesStack(arr []int) int {
+	var intMax = 1<<31 - 1
+	res := 0
+	stack := []int{intMax}
+	for _, num := range arr {
+		var top int
+		for len(stack) > 0 && stack[len(stack)-1] <= num {
+			top, stack = stack[len(stack)-1], stack[:len(stack)-1]
+			res += top * min(num, stack[len(stack)-1])
+		}
+		stack = append(stack, num)
+	}
+	for len(stack) > 2 {
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res += top * stack[len(stack)-1]
+	}
+	return res
+}
+
 func main() {
 	fmt.Println(mctFromLeafValues([]int{6, 2, 4, 7, 3, 7, 1, 8, 9}))
 	fmt.Println(mctFromLeafValuesGreedy([]int{6, 2, 4, 7, 3, 7, 1, 8, 9}))
+	fmt.Println(mctFromLeafValuesStack([]int{6, 2, 4, 7, 3, 7, 1, 8, 9}))
 }
