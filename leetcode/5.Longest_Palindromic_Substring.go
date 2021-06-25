@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func longestPalindromeDp(s string) string {
 	var dp [1001][1001]bool
@@ -40,6 +43,41 @@ func longestPalindromeExpand(s string) string {
 	return s[palStart : palStart+palLen]
 }
 
+func longestPalindromeManachers(s string) string {
+	b := strings.Builder{}
+	b.WriteString("^#")
+	for _, ch := range s {
+		b.WriteRune(ch)
+		b.WriteByte('#')
+	}
+	b.WriteString("$")
+	ss := b.String()
+
+	maxRadius := 0
+	maxRadiusCenter := 0
+	p := make([]int, len(ss)+1)
+	center, right := 0, 0
+	for i := 1; i < len(ss)-1; i++ {
+		mirror := 2*center - i
+		if i < right {
+			p[i] = min(right-i, p[mirror])
+		}
+
+		for ss[i+p[i]+1] == ss[i-(p[i]+1)] {
+			p[i]++
+		}
+		if p[i] > maxRadius {
+			maxRadius = p[i]
+			maxRadiusCenter = i
+		}
+		if i+p[i] > right {
+			center = i
+			right = i + p[i]
+		}
+	}
+	return s[(maxRadiusCenter-maxRadius)/2 : (maxRadiusCenter+maxRadius)/2]
+}
+
 func expand(s string, left, right int) int {
 	for left >= 0 && right < len(s) && s[left] == s[right] {
 		left--
@@ -54,8 +92,15 @@ func max(a, b int) int {
 	}
 	return b
 }
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
 
 func main() {
 	fmt.Println(longestPalindromeDp("yabax"))
 	fmt.Println(longestPalindromeExpand("yabax"))
+	fmt.Println(longestPalindromeManachers("yabax"))
 }
