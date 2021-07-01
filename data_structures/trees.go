@@ -1,4 +1,4 @@
-package trees
+package main
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-const SPACE  = 10
+const SPACE = 10
 
 type TreeNode struct {
 	Val         int
@@ -137,8 +137,12 @@ func isSymmetric(root *TreeNode) bool {
 }
 
 func isMirror(l *TreeNode, r *TreeNode) bool {
-	if l == nil && r == nil { return true}
-	if l == nil || r == nil { return false}
+	if l == nil && r == nil {
+		return true
+	}
+	if l == nil || r == nil {
+		return false
+	}
 	return l.Val == r.Val && isMirror(l.Left, r.Right) && isMirror(l.Right, r.Left)
 }
 
@@ -148,9 +152,9 @@ func hasPathSum(root *TreeNode, sum int) bool {
 		return false
 	case root.Left == nil && root.Right == nil && root.Val == sum:
 		return true
-	case hasPathSum(root.Left, sum - root.Val):
+	case hasPathSum(root.Left, sum-root.Val):
 		return true
-	case hasPathSum(root.Right, sum - root.Val):
+	case hasPathSum(root.Right, sum-root.Val):
 		return true
 	default:
 		return false
@@ -158,14 +162,16 @@ func hasPathSum(root *TreeNode, sum int) bool {
 }
 
 func printTreeVertical(root *TreeNode) [][]string {
-	if root == nil { return nil}
+	if root == nil {
+		return nil
+	}
 	depth := maxDepth(root)
 	s := 1<<uint(depth) - 1
 	res := make([][]string, 0)
-	for i := 0; i < depth; i ++ {
+	for i := 0; i < depth; i++ {
 		//res = append(res, make([]string, s))
 		row := make([]string, s)
-		for  r := range row {
+		for r := range row {
 			row[r] = " "
 		}
 		res = append(res, row)
@@ -174,7 +180,7 @@ func printTreeVertical(root *TreeNode) [][]string {
 	return res
 }
 
-func fill(root *TreeNode, m [][]string, i, l,r int) {
+func fill(root *TreeNode, m [][]string, i, l, r int) {
 	if root == nil {
 		return
 	}

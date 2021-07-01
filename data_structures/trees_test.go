@@ -1,4 +1,4 @@
-package trees
+package main
 
 import (
 	"bytes"
@@ -13,8 +13,8 @@ import (
 func TestBinaryTree(t *testing.T) {
 	tree := &TreeNode{
 		Val:   1,
-		Left:  &TreeNode{ Val: 2, Left: nil, Right: nil },
-		Right: &TreeNode{ Val: 3, Left: nil, Right: nil },
+		Left:  &TreeNode{Val: 2, Left: nil, Right: nil},
+		Right: &TreeNode{Val: 3, Left: nil, Right: nil},
 	}
 	//fmt.Println(tree)
 
